@@ -1,18 +1,40 @@
-local upload = require "resty.upload"
-local decode = require "cjson.safe".decode
+local upload  = require "resty.upload"
+local decode  = require "cjson.safe".decode
 local tmpname = os.tmpname
-local concat = table.concat
-local type = type
-local find = string.find
-local open = io.open
-local sub = string.sub
-local ngx = ngx
-local req = ngx.req
-local var = ngx.var
-local pargs = req.get_post_args
-local uargs = req.get_uri_args
-local body = req.read_body
-local data = req.get_body_data
+local concat  = table.concat
+local type    = type
+local find    = string.find
+local open    = io.open
+local sub     = string.sub
+local ngx     = ngx
+local req     = ngx.req
+local var     = ngx.var
+local body    = req.read_body
+local data    = req.get_body_data
+local pargs   = req.get_post_args
+local uargs   = req.get_uri_args
+
+local function basename(s)
+    local p = 1
+    local i = find(s, "\\", 1, true)
+    while i do
+        p = i + 1
+        i = find(s, "\\", p, true)
+    end
+    if p > 1 then
+        s = sub(s, p)
+    end
+    p = 1
+    i = find(s, "/", 1, true)
+    while i do
+        p = i + 1
+        i = find(s, "/", p, true)
+    end
+    if p > 1 then
+        s = sub(s, p)
+    end
+    return s
+end
 
 local function kv(r, s)
     if s == "formdata" then return end
@@ -69,6 +91,7 @@ return function(options)
                             f = {
                                 name = d.name,
                                 type = h["Content-Type"] and h["Content-Type"][1],
+                                file = basename(d.filename),
                                 tmpname = tmpname()
                             }
                             o, e = open(f.tmpname, "w+")
