@@ -2,15 +2,17 @@ local upload = require "resty.upload"
 local decode = require "cjson.safe".decode
 local tmpname = os.tmpname
 local concat = table.concat
-local sub = string.sub
+local type = type
 local find = string.find
 local open = io.open
+local sub = string.sub
+local ngx = ngx
 local req = ngx.req
+local var = ngx.var
 local pargs = req.get_post_args
 local uargs = req.get_uri_args
 local body = req.read_body
 local data = req.get_body_data
-local var = ngx.var
 
 local function kv(r, s)
     if s == "formdata" then return end
@@ -39,10 +41,11 @@ local function parse(s)
 end
 
 return function(options)
-    local ct = var.content_type
-    if ct == nil then return end
+    local get = uargs()
     local post = { n = 0 }
     local files = { n = 0 }
+    local ct = var.content_type
+    if ct == nil then return get, post, files end
     if sub(ct, 1, 19) == "multipart/form-data" then
         local chunk   = options.chunk_size or 8192
         local form, e = upload:new(chunk)
@@ -54,8 +57,10 @@ return function(options)
             if not t then return nil, e end
             if t == "header" then
                 if not h then h = {} end
-                local k, v = r[1], parse(r[2])
-                if v then h[k] = v end
+                if type(r) == "table" then
+                    local k, v = r[1], parse(r[2])
+                    if v then h[k] = v end
+                end
             elseif t == "body" then
                 if h then
                     local d = h["Content-Disposition"]
@@ -129,5 +134,5 @@ return function(options)
         body()
         post = pargs()
     end
-    return uargs(), post, files
+    return get, post, files
 end
