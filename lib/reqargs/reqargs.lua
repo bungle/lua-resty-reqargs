@@ -14,26 +14,21 @@ local data    = req.get_body_data
 local pargs   = req.get_post_args
 local uargs   = req.get_uri_args
 
-local function basename(s)
+function rightmost(s, sep)
     local p = 1
-    local i = find(s, "\\", 1, true)
+    local i = find(s, sep, 1, true)
     while i do
         p = i + 1
-        i = find(s, "\\", p, true)
-    end
-    if p > 1 then
-        s = sub(s, p)
-    end
-    p = 1
-    i = find(s, "/", 1, true)
-    while i do
-        p = i + 1
-        i = find(s, "/", p, true)
+        i = find(s, sep, p, true)
     end
     if p > 1 then
         s = sub(s, p)
     end
     return s
+end
+
+function basename(s)
+    return rightmost(rightmost(s, "\\"), "/")
 end
 
 local function kv(r, s)
