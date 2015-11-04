@@ -14,7 +14,7 @@ local data    = req.get_body_data
 local pargs   = req.get_post_args
 local uargs   = req.get_uri_args
 
-function rightmost(s, sep)
+local function rightmost(s, sep)
     local p = 1
     local i = find(s, sep, 1, true)
     while i do
@@ -27,7 +27,7 @@ function rightmost(s, sep)
     return s
 end
 
-function basename(s)
+local function basename(s)
     return rightmost(rightmost(s, "\\"), "/")
 end
 
@@ -87,9 +87,9 @@ return function(options)
                                 name = d.name,
                                 type = h["Content-Type"] and h["Content-Type"][1],
                                 file = basename(d.filename),
-                                tmpname = tmpname()
+                                temp = tmpname()
                             }
-                            o, e = open(f.tmpname, "w+")
+                            o, e = open(f.temp, "w+")
                             if not o then return nil, e end
                             o:setvbuf("full", chunk)
                         else
