@@ -59,8 +59,8 @@ end
 
 return function(options)
     local get = uargs()
-    local post = { n = 0 }
-    local files = { n = 0 }
+    local post = {}
+    local files = {}
     local ct = var.content_type
     if ct == nil then return get, post, files end
     if sub(ct, 1, 19) == "multipart/form-data" then
@@ -131,12 +131,13 @@ return function(options)
                                 z = { z, s }
                                 z.n = 2
                             end
+                            c[n] = z
                         else
                             c[n] = s
                         end
                     else
-                        c[c.n+1] = s
                         c.n = c.n + 1
+                        c[c.n] = s
                     end
                 end
             elseif t == "eof" then
