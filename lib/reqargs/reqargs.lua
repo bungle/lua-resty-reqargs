@@ -64,9 +64,9 @@ return function(options)
     local ct = var.content_type
     if ct == nil then return get, post, files end
     if sub(ct, 1, 19) == "multipart/form-data" then
-        local maxsz   = options.max_fsize
-        local maxfu   = options.max_files
-        local chunk   = options.chunk_size or 8192
+        local maxfz = options.max_fsize
+        local maxfs = options.max_files
+        local chunk = options.chunk_size or 8192
         local form, e = upload:new(chunk)
         if not form then return nil, e end
         local h, p, f, o, s
@@ -86,7 +86,7 @@ return function(options)
                     local d = h["Content-Disposition"]
                     if d then
                         if d.filename then
-                            if maxsz then
+                            if maxfz then
                                 s = 0
                             end
                             f = {
@@ -105,13 +105,13 @@ return function(options)
                     h = nil
                 end
                 if o then
-                    if maxsz then
+                    if maxfz then
                         s = s + #r
-                        if maxsz < s then
+                        if maxfz < s then
                             return nil, "The maximum size of an uploaded file exceeded."
                         end
                     end
-                    if maxfu and maxfu < u + 1 then
+                    if maxfs and maxfs < u + 1 then
                         return nil, "The maximum number of files allowed to be uploaded simultaneously exceeded."
                     end
                     local ok, e = o:write(r)
@@ -126,7 +126,7 @@ return function(options)
                     f.size = o:seek()
                     o:close()
                     o = nil
-                    if maxfu and f.size > 0 then
+                    if maxfs and f.size > 0 then
                         u = u + 1
                     end
                 end
