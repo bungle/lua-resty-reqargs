@@ -89,7 +89,7 @@ return function(options)
                                 file = basename(d.filename),
                                 temp = tmpname()
                             }
-                            o, e = open(f.temp, "w+")
+                            o, e = open(f.temp, "w+b")
                             if not o then return nil, e end
                             o:setvbuf("full", chunk)
                         else
