@@ -64,10 +64,13 @@ return function(options)
     local ct = var.content_type
     if ct == nil then return get, post, files end
     if sub(ct, 1, 19) == "multipart/form-data" then
+        local maxsz   = options.max_fsize
+        local maxfu   = options.max_files
         local chunk   = options.chunk_size or 8192
         local form, e = upload:new(chunk)
         if not form then return nil, e end
-        local h, p, f, o
+        local h, p, f, o, s
+        local u = 0
         form:set_timeout(options.timeout or 1000)
         while true do
             local t, r, e = form:read()
@@ -83,6 +86,9 @@ return function(options)
                     local d = h["Content-Disposition"]
                     if d then
                         if d.filename then
+                            if maxsz then
+                                s = 0
+                            end
                             f = {
                                 name = d.name,
                                 type = h["Content-Type"] and h["Content-Type"][1],
@@ -99,6 +105,15 @@ return function(options)
                     h = nil
                 end
                 if o then
+                    if maxsz then
+                        s = s + #r
+                        if maxsz < s then
+                            return nil, "The maximum size of an uploaded file exceeded."
+                        end
+                    end
+                    if maxfu and maxfu < u + 1 then
+                        return nil, "The maximum number of files allowed to be uploaded simultaneously exceeded."
+                    end
                     local ok, e = o:write(r)
                     if not ok then return nil, e end
                 elseif p then
@@ -111,6 +126,9 @@ return function(options)
                     f.size = o:seek()
                     o:close()
                     o = nil
+                    if maxfu and f.size > 0 then
+                        u = u + 1
+                    end
                 end
                 local c, d
                 if f then
