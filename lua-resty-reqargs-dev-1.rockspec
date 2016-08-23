@@ -16,6 +16,6 @@ dependencies = {
 build = {
     type = "builtin",
     modules = {
-        ["resty.reqargs"] = "lib/resty/reqargs.lua"
+        ["resty.reqargs"] = "lib/reqargs/reqargs.lua"
     }
 }
