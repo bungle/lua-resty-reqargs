@@ -64,10 +64,10 @@ return function(options)
     local ct = var.content_type
     if ct == nil then return get, post, files end
     if sub(ct, 1, 19) == "multipart/form-data" then
-        local maxfz = options.max_fsize
-        local maxfs = options.max_files
+        local maxfz = options.max_file_size
+        local maxfs = options.max_file_uploads
         local chunk = options.chunk_size or 8192
-        local form, e = upload:new(chunk)
+        local form, e = upload:new(chunk, options.max_line_size)
         if not form then return nil, e end
         local h, p, f, o, s
         local u = 0
