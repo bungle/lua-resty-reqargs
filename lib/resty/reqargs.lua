@@ -15,7 +15,7 @@ local data    = req.get_body_data
 local pargs   = req.get_post_args
 local uargs   = req.get_uri_args
 
-local function rightmost(s, sep)
+local function basename(s)
     local p = 1
     local i = find(s, sep, 1, true)
     while i do
@@ -26,10 +26,6 @@ local function rightmost(s, sep)
         s = sub(s, p)
     end
     return s
-end
-
-local function basename(s)
-    return rightmost(s, sep)
 end
 
 local function kv(r, s)
