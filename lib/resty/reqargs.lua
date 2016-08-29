@@ -6,6 +6,7 @@ local type    = type
 local find    = string.find
 local open    = io.open
 local sub     = string.sub
+local sep     = sub(package.config, 1,1) or "/"
 local ngx     = ngx
 local req     = ngx.req
 local var     = ngx.var
@@ -28,7 +29,7 @@ local function rightmost(s, sep)
 end
 
 local function basename(s)
-    return rightmost(rightmost(s, "\\"), "/")
+    return rightmost(s, sep)
 end
 
 local function kv(r, s)
@@ -64,6 +65,10 @@ return function(options)
     local ct = var.content_type
     if ct == nil then return get, post, files end
     if sub(ct, 1, 19) == "multipart/form-data" then
+        local tmpdr = options.tmp_dir
+        if tmpdr and sub(tmpdr, -1) ~= sep then
+            tmpdr = tmpdr .. sep
+        end
         local maxfz = options.max_file_size
         local maxfs = options.max_file_uploads
         local chunk = options.chunk_size or 8192
@@ -93,7 +98,7 @@ return function(options)
                                 name = d.name,
                                 type = h["Content-Type"] and h["Content-Type"][1],
                                 file = basename(d.filename),
-                                temp = tmpname()
+                                temp = tmpdr and (tmpdr .. basename(tmpname())) or tmpname()
                             }
                             o, e = open(f.temp, "w+b")
                             if not o then return nil, e end
