@@ -109,14 +109,19 @@ return function(options)
                     if maxfz then
                         s = s + #r
                         if maxfz < s then
+                            o:close()
                             return nil, "The maximum size of an uploaded file exceeded."
                         end
                     end
                     if maxfs and maxfs < u + 1 then
+                        o:close()
                         return nil, "The maximum number of files allowed to be uploaded simultaneously exceeded."
                     end
                     local ok, e = o:write(r)
-                    if not ok then return nil, e end
+                    if not ok then
+                        o:close()
+                        return nil, e
+                    end
                 elseif p then
                     local n = p.data.n
                     p.data[n] = r
