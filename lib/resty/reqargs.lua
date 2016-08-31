@@ -55,7 +55,7 @@ local function parse(s)
 end
 
 return function(options)
-    local get = uargs()
+    local get = uargs(options.max_get_args or 100)
     local post = {}
     local files = {}
     local ct = var.content_type
@@ -175,7 +175,7 @@ return function(options)
         post = decode(data()) or {}
     else
         body()
-        post = pargs()
+        post = pargs(options.max_post_args or 100)
     end
     return get, post, files
 end
