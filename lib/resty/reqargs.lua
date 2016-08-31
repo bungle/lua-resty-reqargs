@@ -11,9 +11,20 @@ local ngx     = ngx
 local req     = ngx.req
 local var     = ngx.var
 local body    = req.read_body
+local file    = ngx.req.get_body_file
 local data    = req.get_body_data
 local pargs   = req.get_post_args
 local uargs   = req.get_uri_args
+
+local function read(f)
+    local f, e = open(f, "rb")
+    if not f then
+        return nil, e
+    end
+    local c = f:read "*a"
+    f:close()
+    return c
+end
 
 local function basename(s)
     local p = 1
@@ -172,7 +183,18 @@ return function(options)
         if not t then return nil, e end
     elseif sub(ct, 1, 16) == "application/json" then
         body()
-        post = decode(data()) or {}
+        local j = data()
+        if j == nil then
+            local f = file()
+            if f ~= nil then
+                j = read(f)
+                if j then
+                    post = decode(j) or {}
+                end
+            end
+        else
+            post = decode(j) or {}
+        end
     else
         body()
         post = pargs(options.max_post_args or 100)
