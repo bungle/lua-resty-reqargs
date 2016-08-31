@@ -78,7 +78,7 @@ return function(options)
         end
         local maxfz = options.max_file_size
         local maxfs = options.max_file_uploads
-        local chunk = options.chunk_size or 8192
+        local chunk = options.chunk_size or 4096
         local form, e = upload:new(chunk, options.max_line_size)
         if not form then return nil, e end
         local h, p, f, o, s
