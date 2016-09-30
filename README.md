@@ -42,7 +42,7 @@ local reqargs = require "reqargs"
 
 ### get, post, files regargs(options)
 
-When you caa the function (`reqargs`) you can pass it options. These
+When you call the function (`reqargs`) you can pass it `options`. These
 options override whatever you may have defined in your Nginx configuration
 (or the defaults). You may use the following options:
 
