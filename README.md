@@ -113,8 +113,6 @@ set $reqargs_max_line_size     512;
 set $reqargs_max_file_uploads  10;
 ```
 
-If the limits exceed, the only function in this modile will return nil, ´error`.
-
 ## Changes
 
 The changes of every release of this module is recorded in [Changes.md](https://github.com/bungle/lua-resty-reqargs/blob/master/Changes.md) file.
