@@ -48,12 +48,12 @@ options override whatever you may have defined in your Nginx configuration
 
 ```lua
 {
-    tmp_dir = "/tmp",
-    timeout = 1000,
-    chunk_size = 4096,
-    max_get_args = 100,
-    mas_post_args = 100,
-    max_line_size = 512,
+    tmp_dir          = "/tmp",
+    timeout          = 1000,
+    chunk_size       = 4096,
+    max_get_args     = 100,
+    mas_post_args    = 100,
+    max_line_size    = 512,
     max_file_uploads = 10
 }
 ```
