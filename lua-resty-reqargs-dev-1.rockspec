@@ -4,7 +4,7 @@ source = {
     url = "git://github.com/bungle/lua-resty-reqargs.git"
 }
 description = {
-    summary = "Helper to Retrieve HTTP Request Arguments and File Uploads",
+    summary = "HTTP Request Arguments and File Uploads Helper",
     detailed = "lua-resty-reqargs is a helper to retrieve application/x-www-form-urlencoded, multipart/form-data, and application/json HTTP request arguments.",
     homepage = "https://github.com/bungle/lua-resty-reqargs",
     maintainer = "Aapo Talvensaari <aapo.talvensaari@gmail.com>",
