@@ -37,7 +37,7 @@ LuaRocks repository for `lua-resty-reqargs` is located at https://luarocks.org/m
 This module has only one function, and that function is loaded with require:
 
 ```lua
-local reqargs = require "reqargs"
+local reqargs = require "resty.reqargs"
 ```
 
 ### get, post, files regargs(options)
