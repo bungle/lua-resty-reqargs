@@ -84,7 +84,7 @@ are presented as a Lua tables, that look like this (think about PHP's `$_FILES`)
     -- The file size of the uploaded file (in bytes)
     size = 123465
     -- The location where the uploaded file was streamed
-    temp = '/tmp/????'
+    temp = "/tmp/????"
 }
 ```
 
