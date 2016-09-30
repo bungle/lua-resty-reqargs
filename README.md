@@ -71,7 +71,7 @@ last return value `files` contains all the files uploaded. The `files`
 return value will only contain data when there are actually files uploaded
 and that the request content type is set to `multipart/form-data`. `files`
 has the same structure as `get` and `post` for the keys, but the values
-are presented as a Lua tables.
+are presented as a Lua tables, that look like this (think about PHP's `$_FILES`):
 
 ```lua
 {
