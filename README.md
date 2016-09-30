@@ -100,8 +100,8 @@ use, and their default values:
 set $reqargs_tmp_dir           /tmp; # the default is the system temp dir
 set $reqargs_timeout           1000; # see https://github.com/openresty/lua-resty-upload
 set $reqargs_chunk_size        4096; # see https://github.com/openresty/lua-resty-upload
-set $reqargs_max_get_args      100;  
-set $reqargs_max_post_args     100;
+set $reqargs_max_get_args      100;  # see https://github.com/openresty/lua-nginx-module#ngxreqget_uri_args
+set $reqargs_max_post_args     100;  # see https://github.com/openresty/lua-nginx-module#ngxreqget_post_args
 set $reqargs_max_line_size     512;  # see https://github.com/openresty/lua-resty-upload
 set $reqargs_max_file_uploads  10;   # the default is unlimited
 ```
