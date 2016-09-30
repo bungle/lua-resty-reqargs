@@ -75,7 +75,7 @@ are presented as a Lua tables.
 
 ```lua
 {
-    -- The name of the file upload form fiels (same as the key)
+    -- The name of the file upload form field (same as the key)
     name = "photo",
     -- The name of the file that the user selected for the upload
     file = "cat.jpg",
