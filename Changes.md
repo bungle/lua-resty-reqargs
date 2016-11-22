@@ -10,8 +10,8 @@ All notable changes to `lua-resty-reqargs` will be documented in this file.
 
 ##[1.2] - 2016-08-23
 ### Added
--Added max_fsize option that can be used to control how large can one uploaded file be.
--Added max_files option that can be used to control how many files can be uploaded.
+- Added max_fsize option that can be used to control how large can one uploaded file be.
+- Added max_files option that can be used to control how many files can be uploaded.
 
 ### Fixed
 - LuaRocks etc. was using wrong directory name (renamed regargs dir to resty).
