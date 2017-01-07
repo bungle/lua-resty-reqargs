@@ -77,6 +77,7 @@ local function parse(s)
 end
 
 return function(options)
+    options = options or {}
     local get = uargs(options.max_get_args or defaults.max_get_args)
     local post = {}
     local files = {}
