@@ -4,7 +4,7 @@ All notable changes to `lua-resty-reqargs` will be documented in this file.
 
 ## [1.4] - 2015-01-07
 ### Fixed
-- Fixed issue with not options passed as reported here:
+- Fixed issue with no options passed as reported here:
   https://groups.google.com/forum/#!topic/openresty-en/uXRXC0NbfbI
 
 ## [1.3] - 2016-09-29
