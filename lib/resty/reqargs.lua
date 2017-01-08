@@ -77,7 +77,7 @@ local function parse(s)
 end
 
 return function(options)
-    options = options or {}
+    options = options or defaults
     local get = uargs(options.max_get_args or defaults.max_get_args)
     local post = {}
     local files = {}
@@ -191,7 +191,7 @@ return function(options)
                 break
             end
         end
-        local t, r, e = form:read()
+        local t, _, e = form:read()
         if not t then return nil, e end
     elseif sub(ct, 1, 16) == "application/json" then
         body()
