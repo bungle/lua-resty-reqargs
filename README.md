@@ -117,6 +117,13 @@ set $reqargs_max_file_uploads  10;
 
 The changes of every release of this module is recorded in [Changes.md](https://github.com/bungle/lua-resty-reqargs/blob/master/Changes.md) file.
 
+## See Also
+
+* [lua-resty-route](https://github.com/bungle/lua-resty-route) — Routing library
+* [lua-resty-session](https://github.com/bungle/lua-resty-session) — Session library
+* [lua-resty-template](https://github.com/bungle/lua-resty-template) — Templating engine
+* [lua-resty-validation](https://github.com/bungle/lua-resty-validation) — Validation and filtering library
+
 ## License
 
 `lua-resty-reqargs` uses two clause BSD license.
