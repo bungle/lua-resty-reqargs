@@ -54,6 +54,7 @@ options override whatever you may have defined in your Nginx configuration
     max_get_args     = 100,
     mas_post_args    = 100,
     max_line_size    = 512,
+    max_file_size    = 10240,
     max_file_uploads = 10
 }
 ```
@@ -111,6 +112,8 @@ set $reqargs_max_post_args     100;
 set $reqargs_max_line_size     512;  
 # the default is unlimited
 set $reqargs_max_file_uploads  10;
+# the default is unlimited
+set $reqargs_max_file_size     10240;
 ```
 
 ## Changes
