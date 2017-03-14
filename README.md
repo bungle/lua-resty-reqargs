@@ -111,9 +111,9 @@ set $reqargs_max_post_args     100;
 # see https://github.com/openresty/lua-resty-upload
 set $reqargs_max_line_size     512;  
 # the default is unlimited
-set $reqargs_max_file_uploads  10;
-# the default is unlimited
 set $reqargs_max_file_size     10240;
+# the default is unlimited
+set $reqargs_max_file_uploads  10;
 ```
 
 ## Changes
