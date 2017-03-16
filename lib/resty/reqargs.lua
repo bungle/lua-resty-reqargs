@@ -24,7 +24,7 @@ local defaults = {
     max_get_args     = tonumber(var.reqargs_max_get_args)  or 100,
     max_post_args    = tonumber(var.reqargs_max_post_args) or 100,
     max_line_size    = tonumber(var.reqargs_max_line_size),
-    max_file_size    = tonumber(var.reqargs_max_file_size)
+    max_file_size    = tonumber(var.reqargs_max_file_size),
     max_file_uploads = tonumber(var.reqargs_max_file_uploads)
 }
 
