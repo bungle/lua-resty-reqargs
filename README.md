@@ -120,6 +120,11 @@ set $reqargs_max_file_uploads  10;
 
 The changes of every release of this module is recorded in [Changes.md](https://github.com/bungle/lua-resty-reqargs/blob/master/Changes.md) file.
 
+## Roadmap
+
+* Add safeguards and streaming parsing to `application/json` bodies
+* Add support for pluggable stream writer (e.g. non-blocking network / db writer)
+
 ## See Also
 
 * [lua-resty-route](https://github.com/bungle/lua-resty-route) — Routing library
