@@ -214,9 +214,9 @@ return function(options)
         body()
         local b = data()
         if b == nil then
-            local b = file()
-            if b ~= nil then
-                b = read(b)
+            local f = file()
+            if f ~= nil then
+                b = read(f)
             end
         end
         if b then
