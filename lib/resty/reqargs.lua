@@ -80,11 +80,13 @@ end
 return function(options)
     options = options or defaults
     local get = uargs(options.max_get_args or defaults.max_get_args)
+    local ct = var.content_type or ""
     local post = {}
     local files = {}
-    local ct = var.content_type
-    if ct == nil then return get, post, files end
-    if sub(ct, 1, 19) == "multipart/form-data" then
+    if sub(ct, 1, 33) == "application/x-www-form-urlencoded" then
+        body()
+        post = pargs(options.max_post_args or defaults.max_post_args)
+    elseif sub(ct, 1, 19) == "multipart/form-data" then
         local tmpdr = options.tmp_dir or defaults.tmp_dir
         if tmpdr and sub(tmpdr, -1) ~= sep then
             tmpdr = tmpdr .. sep
@@ -210,7 +212,16 @@ return function(options)
         end
     else
         body()
-        post = pargs(options.max_post_args or defaults.max_post_args)
+        local b = data()
+        if b == nil then
+            local b = file()
+            if b ~= nil then
+                b = read(b)
+            end
+        end
+        if b then
+            post = { b }
+        end
     end
     return get, post, files
 end
