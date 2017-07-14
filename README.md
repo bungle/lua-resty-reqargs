@@ -40,7 +40,7 @@ This module has only one function, and that function is loaded with require:
 local reqargs = require "resty.reqargs"
 ```
 
-### get, post, files regargs(options)
+### get, post, files reqargs(options)
 
 When you call the function (`reqargs`) you can pass it `options`. These
 options override whatever you may have defined in your Nginx configuration
